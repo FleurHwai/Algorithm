@@ -1,0 +1,12 @@
+def solution(nums):
+    from itertools import combinations as comb
+    answer=0
+    for i in comb(nums,3):
+        sums=sum(i)
+        print(i)
+        for j in range(2,sums):
+            if sums%j==0:
+                break
+            elif sums%j!=0 and sums-1==j:
+                answer+=1
+    return answer
