@@ -1,0 +1,23 @@
+## 첫번째 답안 but 런타임 에러
+def solution(n):
+    answer = 0
+    root=n**(1/2)
+    if root-int(root)==0:
+        answer+=root
+    else:
+        root=int(root)+1
+    for i in range(1,root):
+        if n%i==0:
+            answer+=i
+            answer+=n/i
+    return answer
+
+
+
+## 새로운 답안
+def solution(n):
+    answer = 0
+    for i in range(1,n+1):
+        if n%i==0:
+            answer+=i
+    return answer
