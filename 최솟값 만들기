@@ -1,0 +1,32 @@
+### 첫 번째 풀이 but 효율성 오류
+def solution(A,B):
+    answer = 0
+    if max(A)>=max(B):
+        for i in range(len(A)):
+            num=max(A)
+            A.remove(num)
+            num1=min(B)
+            B.remove(num1)
+            answer+=num*num1
+    else:
+        for i in range(len(B)):
+            num=max(B)
+            B.remove(num)
+            num1=min(A)
+            A.remove(num1)
+            answer+=num*num1
+    return answer
+    
+    ### 두 번째 풀이 & 문제 해결
+    def solution(A,B):
+    answer = 0
+    A.sort()
+    B.sort()
+    length=len(A)-1
+    if max(A)>=max(B):
+        for i in range(length+1):
+            answer+=A[length-i]*B[i]
+    else:
+        for i in range(length+1):
+            answer+=A[i]*B[length-i]
+    return answer
