@@ -1,0 +1,26 @@
+### 첫 번째 시도 but 정확성 & 효율성 테스트 실패
+def solution(phone_book):
+    for i in range(len(phone_book)):
+        length=len(phone_book[i])
+        for j in range(i+1,len(phone_book)):
+            if phone_book[i]==phone_book[j][:length]:
+                return False
+    return True
+    
+### 두 번째 시도 but 정확성 & 효율성 테스트 실패
+### (설명) startswith() 메서드를 사용했지만 두 개의 반복문이 여전히 사용되어 효율성 테스트에 실패
+def solution(phone_book):
+    for i in range(len(phone_book)):
+        for j in range(i+1,len(phone_book)):
+            if phone_book[j].startswith(phone_book[i]):
+                return False
+    return True
+
+### 세 번째 시도 & 성공
+### (설명) startswith() & sort()를 통해 효율성과 정확성을 높임
+def solution(phone_book):
+    phone_book.sort()
+    for i in range(len(phone_book)-1):
+            if phone_book[i+1].startswith(phone_book[i]):
+                return False
+    return True
