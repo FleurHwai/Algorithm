@@ -1,0 +1,40 @@
+### 첫 번째 시도 but 정확성 & 효율성 테스트 실패
+def solution(scoville, K):
+    answer=0
+    while(min(scoville)<K):
+        scoville.sort()
+        scoville[0]=scoville[0]+scoville[1]*2
+        scoville.pop(1)
+        answer+=1
+    if answer==0:
+        return -1
+    else:
+        return answer
+    
+### 두 번째 시도 but 정확성 & 효율성 테스트 실패
+### (설명) heap 모듈 사용함 but loop의 문제점을 해결하지 못한 것 같다
+import heapq
+
+def solution(scoville, K):
+    answer=0
+    heapq.heapify(scoville)
+    while min(scoville) < K:
+        try:
+            mix=heapq.heappop(scoville)+heapq.heappop(scoville)*2
+        except IndexError:
+            return -1
+        heapq.heappush(scoville,mix)
+        answer+=1
+        
+### 세 번째 시도 and 성공
+### (설명) heap 모듈 사용함 and 리스트에 하나만 남았을 때 깨지는 heap 모듈의 문제를 해결하고 코드를 최소화하기 위해 if else문을 이용해 return함
+import heapq
+
+def solution(scoville, K):
+    answer=0
+    heapq.heapify(scoville)
+    while scoville[0]<K and len(scoville)>1:
+            answer+=1
+            mix=heapq.heappop(scoville)+heapq.heappop(scoville)*2
+            heapq.heappush(scoville,mix)
+    return answer if scoville[0]>=K else -1
